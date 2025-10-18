@@ -1,0 +1,27 @@
+package fr.uvsq.cprog.collex;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class CommandeNomTest {
+
+    @Test
+    public void testExecuteRenvoieResultatCorrect() {
+        Dns dns = new Dns();
+        dns.add("example.com", "1.1.1.1");
+
+        CommandeNom cmd = new CommandeNom("example.com");
+        String result = cmd.execute(dns);
+
+        assertTrue(result.contains("1.1.1.1"));
+    }
+
+    @Test
+    public void testExecuteNomInexistant() {
+        Dns dns = new Dns();
+        CommandeNom cmd = new CommandeNom("inconnu.com");
+
+        String result = cmd.execute(dns);
+        assertEquals("Nom inconnu", result);
+    }
+}
