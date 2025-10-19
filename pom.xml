@@ -83,7 +83,7 @@
         <version>${maven.surefire.plugin.version}</version>
       </plugin>
 
-      <!-- Checkstyle Google à validate -->
+      <!-- Checkstyle (Google) -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
@@ -95,17 +95,21 @@
             <version>${checkstyle.version}</version>
           </dependency>
         </dependencies>
+
+        
+        <configuration>
+          <configLocation>google_checks.xml</configLocation>
+          <encoding>${project.build.sourceEncoding}</encoding>
+          <consoleOutput>true</consoleOutput>
+          <failsOnError>true</failsOnError>
+        </configuration>
+
+        <!-- Liaison à la phase validate -->
         <executions>
           <execution>
             <id>checkstyle-validate</id>
             <phase>validate</phase>
             <goals><goal>check</goal></goals>
-            <configuration>
-              <configLocation>google_checks.xml</configLocation>
-              <encoding>${project.build.sourceEncoding}</encoding>
-              <consoleOutput>true</consoleOutput>
-              <failsOnError>true</failsOnError>
-            </configuration>
           </execution>
         </executions>
       </plugin>
